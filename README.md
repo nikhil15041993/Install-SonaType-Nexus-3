@@ -112,3 +112,7 @@ sudo systemctl enable nexus
 sudo systemctl start nexus
 sudo systemctl status nexus
 ```
+
+
+Once Nexus is successfully installed, you can access it in the browser by
+URL — http://public_dns_name:8081
