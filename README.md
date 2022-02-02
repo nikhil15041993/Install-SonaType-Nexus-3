@@ -80,3 +80,35 @@ To Increase the nexus JVM heap size, open the /opt/nexus/bin/nexus.vmoptions fil
 
 ```
 
+### Run Nexus as a service using Systemd
+
+To run nexus as service using Systemd
+```
+sudo nano /etc/systemd/system/nexus.service
+```
+paste the below lines into it.
+
+```
+[Unit]
+Description=nexus service
+After=network.target
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=ubuntu
+Group=ubuntu
+ExecStart=/opt/nexus/bin/nexus start
+ExecStop=/opt/nexus/bin/nexus stop
+User=ubuntu
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
+```
+
+## Now Start Nexus
+
+```
+sudo systemctl enable nexus
+sudo systemctl start nexus
+sudo systemctl status nexus
+```
